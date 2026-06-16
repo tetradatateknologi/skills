@@ -66,6 +66,7 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 
 - [`adding-auth`](resources/adding-auth/SKILL.md) - Add OAuth login, session management, and protected routes with Auth.js (NextAuth).
 - [`adding-stripe`](resources/adding-stripe/SKILL.md) - Integrate Stripe checkout, subscriptions, webhooks, and customer portal.
+- [`adding-midtrans`](resources/adding-midtrans/SKILL.md) - Integrate Midtrans payment gateway (Snap, Core API, notifications, refunds) for PHP or Go backends.
 
 ### Testing
 
@@ -80,15 +81,17 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 
 - [`babysitting-pr`](resources/babysitting-pr/SKILL.md) - Monitor an open PR for CI failures, review comments, and merge conflicts — then fix them automatically to keep the PR merge-ready.
 - [`creating-pr`](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests with conventional titles, structured descriptions, and linked issues.
+- [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
 - [`writing-commit-messages`](resources/writing-commit-messages/SKILL.md) - Write conventional commit messages with type prefixes, scopes, and meaningful descriptions.
 - [`incident-response`](resources/incident-response/SKILL.md) - Handle production incidents — triage severity, mitigate, communicate status, and write blameless postmortems.
-- [`systematic-debugging`](resources/systematic-debugging/SKILL.md) - Structured debugging methodology — reproduce, isolate, hypothesize, and verify using git bisect, binary search, and logging.
+- [`rca`](resources/rca/SKILL.md) - Investigate a user-defined problem or bug and produce a structured root cause analysis with evidence and recommended actions.
+- [`trace`](resources/trace/SKILL.md) - Trace bugs from symptom to root cause — reproduce, isolate, hypothesize, verify, then fix and verify.
 - [`chatcrystal`](https://github.com/ZengLiangYi/ChatCrystal/tree/main/skills) - Local-first memory recall and writeback skills for AI coding sessions via ChatCrystal Core and MCP.
 
 ### Infrastructure & DevOps
 
 - [`adding-docker`](resources/adding-docker/SKILL.md) - Dockerize any app with a multi-stage Dockerfile, docker-compose, and .dockerignore.
-- [`setting-up-ci`](resources/setting-up-ci/SKILL.md) - Set up a GitHub Actions CI/CD pipeline with linting, testing, type-checking, and deployment.
+- [`adding-cicd`](resources/adding-cicd/SKILL.md) - Add GitHub Actions CI (PR validation) and deploy (SSH + Docker, or platform deploy).
 - [`setting-up-terraform`](resources/setting-up-terraform/SKILL.md) - Infrastructure-as-code with provider config, modules, remote state, and CI integration.
 - [`antonbabenko-terraform`](https://github.com/antonbabenko/terraform-skill) - Terraform and OpenTofu skill — testing, modules, CI/CD, and production patterns.
 - [`kubernetes-deploying`](resources/kubernetes-deploying/SKILL.md) - Deploy to Kubernetes — Deployments, Services, Ingress, ConfigMaps, health checks, and autoscaling.
@@ -126,6 +129,9 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 
 ### Planning & Architecture
 
+- [`brainstorming`](resources/brainstorming/SKILL.md) - Explore ideas or unfamiliar topics through structured discussion — clarify mental models, surface trade-offs, and fill knowledge gaps without jumping to implementation.
+- [`creating-plan`](resources/creating-plan/SKILL.md) - Turn a coding discussion into a detailed, executable implementation plan for features or bug fixes — ask only when something is unclear.
+- [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke to start coding after a plan or discussion — user's "OK" to proceed.
 - [`mattpocock-prd-to-issues`](https://github.com/mattpocock/skills/tree/main/prd-to-issues) - Convert a product requirements doc into a set of well-scoped GitHub issues.
 - [`mattpocock-improve-architecture`](https://github.com/mattpocock/skills/tree/main/improve-codebase-architecture) - Analyze a codebase and propose concrete architecture improvements.
 - [`mattpocock-grill-me`](https://github.com/mattpocock/skills/tree/main/grill-me) - Challenge assumptions and push back on ideas before committing to an approach.

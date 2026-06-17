@@ -82,6 +82,7 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 ### Workflow
 
 - [`babysitting-pr`](resources/babysitting-pr/SKILL.md) - Monitor an open PR for CI failures, review comments, and merge conflicts — then fix them automatically to keep the PR merge-ready.
+- [`review-pr`](resources/review-pr/SKILL.md) - Review a pull request and draft a single `[AI generated]` summary comment; post it to GitHub via `gh` when the user asks.
 - [`creating-pr`](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests with conventional titles, structured descriptions, and linked issues.
 - [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
 - [`commit`](resources/commit/SKILL.md) - Analyze changes, write conventional commit messages, stage files, and create git commits.

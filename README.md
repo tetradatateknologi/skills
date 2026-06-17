@@ -42,6 +42,8 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`form-testing`](resources/form-testing/SKILL.md) - Fill and submit every form with valid/invalid data using the browser, verifying validation, error states, and success flows.
 - [`parallel-test-fixing`](resources/parallel-test-fixing/SKILL.md) - When multiple tests fail, assign each to a separate subagent that fixes it independently in parallel.
 - [`code-onboarding`](resources/code-onboarding/SKILL.md) - Explore a codebase in parallel (architecture, data models, auth, APIs, deployment) and synthesize an onboarding document.
+- [`how-it-works`](resources/how-it-works/SKILL.md) - Walk through how a named feature works in the codebase — entry points, data flow, key files, auth, and side effects.
+- [`what-to-improve`](resources/what-to-improve/SKILL.md) - Review an existing feature and recommend prioritized improvements — maintainability, performance, security, and testability.
 - [`comparing-branches-visually`](resources/comparing-branches-visually/SKILL.md) - Run two branches on different ports, screenshot the same pages from each, and produce a visual diff for PRs.
 - [`auto-type-checking`](resources/auto-type-checking/SKILL.md) - Run `tsc --noEmit` after file edits to catch type errors immediately. Supports Cursor hooks for automation.
 - [`suggesting-skills`](resources/suggesting-skills/SKILL.md) - When you're struggling with a task a known skill handles, the agent suggests installing it.
@@ -83,6 +85,7 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`creating-pr`](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests with conventional titles, structured descriptions, and linked issues.
 - [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
 - [`commit`](resources/commit/SKILL.md) - Analyze changes, write conventional commit messages, stage files, and create git commits.
+- [`push`](resources/push/SKILL.md) - Commit local changes if needed, then push to the remote branch.
 - [`incident-response`](resources/incident-response/SKILL.md) - Handle production incidents — triage severity, mitigate, communicate status, and write blameless postmortems.
 - [`rca`](resources/rca/SKILL.md) - Investigate a user-defined problem or bug and produce a structured root cause analysis with evidence and recommended actions.
 - [`trace`](resources/trace/SKILL.md) - Trace bugs from symptom to root cause — reproduce, isolate, hypothesize, verify, then fix and verify.
@@ -130,6 +133,9 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 ### Planning & Architecture
 
 - [`brainstorming`](resources/brainstorming/SKILL.md) - Explore ideas or unfamiliar topics through structured discussion — clarify mental models, surface trade-offs, and fill knowledge gaps without jumping to implementation.
+- [`what-do-you-think`](resources/what-do-you-think/SKILL.md) - Evaluate whether a proposed approach is feasible, surface trade-offs, estimate effort, and give an opinion on the user's hypothesis before implementing.
+- [`how-it-works`](resources/how-it-works/SKILL.md) - Walk through how a named feature works in the codebase — entry points, data flow, key files, and side effects (read-only walkthrough).
+- [`what-to-improve`](resources/what-to-improve/SKILL.md) - Recommend prioritized improvements for an existing feature after understanding how it works.
 - [`creating-plan`](resources/creating-plan/SKILL.md) - Turn a coding discussion into a detailed, executable implementation plan for features or bug fixes — ask only when something is unclear.
 - [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke to start coding after a plan or discussion — user's "OK" to proceed.
 - [`mattpocock-prd-to-issues`](https://github.com/mattpocock/skills/tree/main/prd-to-issues) - Convert a product requirements doc into a set of well-scoped GitHub issues.

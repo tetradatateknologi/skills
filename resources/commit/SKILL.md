@@ -156,5 +156,6 @@ asdf
 
 ## Related Skills
 
+- [`push`](../push/SKILL.md) — commit and push to remote in one step
 - [`creating-pr`](../creating-pr/SKILL.md) — after commits are ready on a feature branch
 - [`babysit`](../babysit/SKILL.md) — commit fixups during PR CI/review loops

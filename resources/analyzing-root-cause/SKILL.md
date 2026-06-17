@@ -1,14 +1,14 @@
 ---
-name: rca
+name: analyzing-root-cause
 description: >-
   Investigate a user-defined problem or bug and produce a structured root cause
   analysis with evidence, contributing factors, and recommended actions. Use when
-  the user asks for RCA, root cause analysis, why something broke, post-incident
-  analysis, or wants to understand the cause before fixing.
+  the user asks for RCA, rca, root cause analysis, why something broke,
+  post-incident analysis, or wants to understand the cause before fixing.
 user-invocable: true
 ---
 
-# RCA
+# Analyzing Root Cause
 
 Investigate a problem the user defines and deliver a **structured root cause analysis** — not a fix unless they ask for one.
 
@@ -21,7 +21,7 @@ Investigate a problem the user defines and deliver a **structured root cause ana
 
 ## When Not to Use
 
-- The user wants an immediate fix with no analysis → use `trace`
+- The user wants an immediate fix with no analysis → use `tracing-bug`
 - A production incident is **still active** and needs mitigation first → use `incident-response`, then return here for RCA after stable
 - The task is trivial (typo, one-line fix) → skip formal RCA
 
@@ -47,13 +47,13 @@ State assumptions explicitly when the user did not provide a detail and risk is 
 
 | Situation | Also use |
 |-----------|----------|
-| Active codebase bug | `trace` for investigation steps (reproduce → isolate → hypothesize → verify) |
+| Active codebase bug | `tracing-bug` for investigation steps (reproduce → isolate → hypothesize → verify) |
 | Live production outage | `incident-response` first — mitigate, then RCA |
 | CI failures | `parallel-ci-triage` |
 | Errors in dev server / terminal | `monitoring-terminal-errors` |
 | Large or unfamiliar codebase | `parallel-exploring` |
 
-Do **not** duplicate `trace` here — follow its process for steps 1–4 and **document evidence** as you go.
+Do **not** duplicate `tracing-bug` here — follow its process for steps 1–4 and **document evidence** as you go.
 
 ### 3. Investigate with evidence
 
@@ -107,7 +107,7 @@ Use this template. Fill every section; write "None identified" or "Unknown" when
 ### 5. After the RCA
 
 - **RCA only** — stop after the report unless the user asks to proceed
-- **RCA then fix** — ask once: "Proceed with fix?" If yes, switch to `trace` (steps 5: fix and verify)
+- **RCA then fix** — ask once: "Proceed with fix?" If yes, switch to `tracing-bug` (steps 5: fix and verify)
 - **Save** — if the user wants it persisted, offer `docs/rca/[slug].md` or `postmortems/[date]-[slug].md`
 
 ## Rules

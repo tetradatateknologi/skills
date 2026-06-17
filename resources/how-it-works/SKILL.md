@@ -12,7 +12,7 @@ user-invocable: true
 
 Trace **how one named feature works** in the current codebase and deliver a structured walkthrough — read-only, evidence-based, no code changes unless the user asks.
 
-For bugs in this feature, use `trace` after the walkthrough. For incidents, use `rca`.
+For bugs in this feature, use `tracing-bug` after the walkthrough. For incidents, use `analyzing-root-cause`.
 
 ## When to Use
 
@@ -23,8 +23,8 @@ For bugs in this feature, use `trace` after the walkthrough. For incidents, use 
 
 ## When Not to Use
 
-- Something is broken and needs fixing → use `trace`
-- They want root cause of an incident → use `rca`
+- Something is broken and needs fixing → use `tracing-bug`
+- They want root cause of an incident → use `analyzing-root-cause`
 - They just cloned the repo and need a full overview → use `code-onboarding`
 - They want a conceptual discussion without reading code → use `brainstorming`
 - They want feasibility or trade-offs for a new idea → use `what-do-you-think`
@@ -151,8 +151,8 @@ If the user wants persistence, write to `docs/features/<slug>.md` or use `saving
 |-----------|-------|
 | Broad codebase unfamiliar | `parallel-exploring` |
 | Full repo onboarding doc | `code-onboarding` |
-| Bug in this feature | `trace` (after walkthrough) |
-| Why something broke | `rca` |
+| Bug in this feature | `tracing-bug` (after walkthrough) |
+| Why something broke | `analyzing-root-cause` |
 | Feasibility of a new idea | `what-do-you-think` |
 | What to improve in this feature | `what-to-improve` |
 | Persist findings | `saving-workspace-context` |

@@ -87,8 +87,8 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`commit`](resources/commit/SKILL.md) - Analyze changes, write conventional commit messages, stage files, and create git commits.
 - [`push`](resources/push/SKILL.md) - Commit local changes if needed, then push to the remote branch.
 - [`incident-response`](resources/incident-response/SKILL.md) - Handle production incidents — triage severity, mitigate, communicate status, and write blameless postmortems.
-- [`rca`](resources/rca/SKILL.md) - Investigate a user-defined problem or bug and produce a structured root cause analysis with evidence and recommended actions.
-- [`trace`](resources/trace/SKILL.md) - Trace bugs from symptom to root cause — reproduce, isolate, hypothesize, verify, then fix and verify.
+- [`analyzing-root-cause`](resources/analyzing-root-cause/SKILL.md) - Investigate a user-defined problem or bug and produce a structured root cause analysis with evidence and recommended actions.
+- [`tracing-bug`](resources/tracing-bug/SKILL.md) - Trace bugs from symptom to root cause — reproduce, isolate, hypothesize, verify, then fix and verify.
 - [`chatcrystal`](https://github.com/ZengLiangYi/ChatCrystal/tree/main/skills) - Local-first memory recall and writeback skills for AI coding sessions via ChatCrystal Core and MCP.
 
 ### Infrastructure & DevOps

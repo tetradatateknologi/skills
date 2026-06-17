@@ -1,15 +1,16 @@
 ---
-name: trace
+name: tracing-bug
 description: >-
   Trace bugs from symptom to root cause — reproduce, isolate, hypothesize,
-  verify, then fix and verify. Use when debugging errors, fixing bugs,
-  investigating stack traces, or when the user wants a bug fixed methodically.
+  verify, then fix and verify. Use when debugging errors, fixing bugs, trace
+  is requested, investigating stack traces, or when the user wants a bug fixed
+  methodically.
 user-invocable: true
 ---
 
-# Trace
+# Tracing Bug
 
-Debug methodically instead of randomly changing code. For analysis without fixing, use `rca`.
+Debug methodically instead of randomly changing code. For analysis without fixing, use `analyzing-root-cause`.
 
 ## The Process
 

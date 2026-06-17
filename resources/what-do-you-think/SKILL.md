@@ -38,7 +38,7 @@ Be an **advisor**, not an implementer. Deliverable: **feasibility verdict + trad
 - Open-ended discussion without a concrete hypothesis — use `brainstorming`
 - They want to understand how existing code works — use `how-it-works`
 - They want improvement recommendations on existing code — use `what-to-improve`
-- Debugging a bug — use `trace` or `rca`
+- Debugging a bug — use `tracing-bug` or `analyzing-root-cause`
 
 ## Workflow
 

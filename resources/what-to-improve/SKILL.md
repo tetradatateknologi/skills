@@ -35,7 +35,7 @@ Pair with `how-it-works`: understand first, then improve. If no walkthrough exis
 ## When Not to Use
 
 - They only want to understand how it works — use `how-it-works`
-- Something is broken — use `trace` or `rca`
+- Something is broken — use `tracing-bug` or `analyzing-root-cause`
 - They have a **new idea** to validate — use `what-do-you-think`
 - They want a line-by-line review of a **diff** — use `code-review`
 - Single-dimension audit only — use `auditing-security` or `auditing-performance`
@@ -198,6 +198,6 @@ Match the user's language unless they ask otherwise.
 
 - The deliverable is the **improvement report**, not code changes
 - Every P0/P1 item must cite evidence or be labeled as assumption
-- Distinguish **bugs** (use `trace`) from **improvement opportunities**
+- Distinguish **bugs** (use `tracing-bug`) from **improvement opportunities**
 - If the feature is already in good shape, say so clearly
 - Offer `creating-plan` only when the user decides to move forward

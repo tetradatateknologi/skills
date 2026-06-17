@@ -1,5 +1,5 @@
 ---
-name: matching-ui-reference
+name: ui-match-reference
 description: >-
   Implement or update frontend UI to match an attached reference image, mockup,
   or screenshot. Maps layout, spacing, typography, and components to the project's
@@ -9,7 +9,7 @@ description: >-
 user-invocable: true
 ---
 
-# Matching UI Reference
+# UI Match Reference
 
 Implement UI that closely matches a visual reference — attached image, page URL,
 or existing code the user points to. Prioritize what is **feasible** in the
@@ -24,7 +24,7 @@ project's stack over pixel-perfect cloning.
 
 ## When not to use
 
-- No visual reference — user only wants general UI polish → `cleaning-up-ui`
+- No visual reference — user only wants general UI polish → `ui-cleanup`
 - User wants a plan before coding → `creating-plan`
 
 ## Reference inputs
@@ -109,7 +109,7 @@ Use the template in **Report format**.
 - [ ] Buttons, inputs, and cards use consistent project components
 - [ ] Icons present where reference shows them (or noted as placeholder)
 - [ ] Images use placeholders with correct aspect ratio when assets unavailable
-- [ ] No unintended overflow or layout breakage (`cleaning-up-ui` fixes if needed)
+- [ ] No unintended overflow or layout breakage (`ui-cleanup` fixes if needed)
 - [ ] Viewport matches reference (mobile vs desktop)
 
 ## Report format

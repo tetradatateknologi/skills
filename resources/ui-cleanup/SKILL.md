@@ -1,5 +1,5 @@
 ---
-name: cleaning-up-ui
+name: ui-cleanup
 description: >-
   Audit and fix messy existing UI — overflow, spacing, alignment, typography,
   and layout inconsistencies. Brings pages in line with common UI patterns.
@@ -8,7 +8,7 @@ description: >-
 user-invocable: true
 ---
 
-# Cleaning Up UI
+# UI Cleanup
 
 Fix existing UI that looks messy or unprofessional. Focus on layout integrity
 first (especially overflow), then spacing and visual consistency.

@@ -41,7 +41,7 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`accessibility-auditing`](resources/accessibility-auditing/SKILL.md) - Use the browser's aria tree to audit for missing labels, broken tab order, ARIA misuse, and contrast issues.
 - [`form-testing`](resources/form-testing/SKILL.md) - Fill and submit every form with valid/invalid data using the browser, verifying validation, error states, and success flows.
 - [`parallel-test-fixing`](resources/parallel-test-fixing/SKILL.md) - When multiple tests fail, assign each to a separate subagent that fixes it independently in parallel.
-- [`codebase-onboarding`](resources/codebase-onboarding/SKILL.md) - Launch parallel explore subagents to investigate architecture, data models, auth, APIs, and deployment — then synthesize an onboarding doc.
+- [`code-onboarding`](resources/code-onboarding/SKILL.md) - Explore a codebase in parallel (architecture, data models, auth, APIs, deployment) and synthesize an onboarding document.
 - [`comparing-branches-visually`](resources/comparing-branches-visually/SKILL.md) - Run two branches on different ports, screenshot the same pages from each, and produce a visual diff for PRs.
 - [`auto-type-checking`](resources/auto-type-checking/SKILL.md) - Run `tsc --noEmit` after file edits to catch type errors immediately. Supports Cursor hooks for automation.
 - [`suggesting-skills`](resources/suggesting-skills/SKILL.md) - When you're struggling with a task a known skill handles, the agent suggests installing it.
@@ -82,7 +82,7 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`babysitting-pr`](resources/babysitting-pr/SKILL.md) - Monitor an open PR for CI failures, review comments, and merge conflicts — then fix them automatically to keep the PR merge-ready.
 - [`creating-pr`](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests with conventional titles, structured descriptions, and linked issues.
 - [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
-- [`writing-commit-messages`](resources/writing-commit-messages/SKILL.md) - Write conventional commit messages with type prefixes, scopes, and meaningful descriptions.
+- [`commit`](resources/commit/SKILL.md) - Analyze changes, write conventional commit messages, stage files, and create git commits.
 - [`incident-response`](resources/incident-response/SKILL.md) - Handle production incidents — triage severity, mitigate, communicate status, and write blameless postmortems.
 - [`rca`](resources/rca/SKILL.md) - Investigate a user-defined problem or bug and produce a structured root cause analysis with evidence and recommended actions.
 - [`trace`](resources/trace/SKILL.md) - Trace bugs from symptom to root cause — reproduce, isolate, hypothesize, verify, then fix and verify.

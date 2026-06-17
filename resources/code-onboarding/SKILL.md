@@ -1,10 +1,10 @@
 ---
-name: codebase-onboarding
-description: Launch multiple explore subagents in parallel to investigate architecture, data models, auth, APIs, and deployment. Synthesize into an onboarding document.
+name: code-onboarding
+description: Explore a codebase in parallel (architecture, data models, auth, APIs, deployment) and synthesize an onboarding document. Use when onboarding to a new repo or project.
 user-invocable: true
 ---
 
-# Codebase Onboarding
+# Code Onboarding
 
 Generate a comprehensive onboarding document for a codebase by exploring it in parallel.
 

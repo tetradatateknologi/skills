@@ -78,13 +78,15 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`mattpocock-tdd`](https://github.com/mattpocock/skills/tree/main/tdd) - Vertical-slice TDD for AI agents — one test, one implementation, repeat. Prevents over-engineering and speculative tests.
 - [`anthropic-webapp-testing`](https://github.com/anthropics/skills/tree/main/skills/webapp-testing) - Automated browser testing for web apps with screenshot verification and interaction flows.
 - [`api-smoke-testing`](resources/api-smoke-testing/SKILL.md) - Discover API routes from the codebase, hit every endpoint, and report which ones return errors.
+- [`creating-qa-testcases`](resources/creating-qa-testcases/SKILL.md) - Create detailed manual QA test cases in JSON format from active branch or PR changes using Indonesian for descriptions.
 
 ### Workflow
 
 - [`babysitting-pr`](resources/babysitting-pr/SKILL.md) - Monitor an open PR for CI failures, review comments, and merge conflicts — then fix them automatically to keep the PR merge-ready.
 - [`review-pr`](resources/review-pr/SKILL.md) - Review a pull request and draft a single `[AI generated]` summary comment; post it to GitHub via `gh` when the user asks.
 - [`creating-pr`](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests with conventional titles, structured descriptions, and linked issues.
-- [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
+- [`ship`](resources/ship/SKILL.md) - Invoke when ready to implement — the user's "OK" to proceed, no re-confirmation.
+- [`ship-isolated`](resources/ship-isolated/SKILL.md) - Implement the agreed plan in an isolated git worktree, push the branch, and create a Pull Request on GitHub, keeping the user's active workspace completely untouched.
 - [`commit`](resources/commit/SKILL.md) - Analyze changes, write conventional commit messages, stage files, and create git commits.
 - [`push`](resources/push/SKILL.md) - Commit local changes if needed, then push to the remote branch.
 - [`incident-response`](resources/incident-response/SKILL.md) - Handle production incidents — triage severity, mitigate, communicate status, and write blameless postmortems.
@@ -138,7 +140,8 @@ Skills that harness Cursor's unique agent capabilities — things only an AI ins
 - [`how-it-works`](resources/how-it-works/SKILL.md) - Walk through how a named feature works in the codebase — entry points, data flow, key files, and side effects (read-only walkthrough).
 - [`what-to-improve`](resources/what-to-improve/SKILL.md) - Recommend prioritized improvements for an existing feature after understanding how it works.
 - [`creating-plan`](resources/creating-plan/SKILL.md) - Turn a coding discussion into a detailed, executable implementation plan for features or bug fixes — ask only when something is unclear.
-- [`ship-the-plan`](resources/ship-the-plan/SKILL.md) - Invoke to start coding after a plan or discussion — user's "OK" to proceed.
+- [`ship`](resources/ship/SKILL.md) - Invoke to start coding after a plan or discussion — user's "OK" to proceed.
+- [`ship-isolated`](resources/ship-isolated/SKILL.md) - Implement the agreed plan in an isolated git worktree, push the branch, and create a Pull Request on GitHub.
 - [`mattpocock-prd-to-issues`](https://github.com/mattpocock/skills/tree/main/prd-to-issues) - Convert a product requirements doc into a set of well-scoped GitHub issues.
 - [`mattpocock-improve-architecture`](https://github.com/mattpocock/skills/tree/main/improve-codebase-architecture) - Analyze a codebase and propose concrete architecture improvements.
 - [`mattpocock-grill-me`](https://github.com/mattpocock/skills/tree/main/grill-me) - Challenge assumptions and push back on ideas before committing to an approach.

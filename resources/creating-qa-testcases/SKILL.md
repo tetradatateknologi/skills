@@ -33,7 +33,7 @@ Use this skill when the user wants to create detailed QA test cases based on the
    ```
 
 2. **Retrieve the diff content**:
-   Fetch the actual code changes (diff) for the affected files to understand the modified logic, UI elements, API endpoints, or database structures:
+   Fetch the actual code changes (diff) for the affected files to understand the modified logic, UI elements, API endpoints, or database structures (Note: while backend/API diffs help you understand the changes, the generated test cases must remain strictly functional and non-technical):
    ```bash
    git diff origin/main...HEAD
    ```
@@ -42,11 +42,13 @@ Use this skill when the user wants to create detailed QA test cases based on the
 3. **Analyze the changes**:
    Analyze the diff to understand:
    - What features, bug fixes, or enhancements were introduced.
-   - Which user interactions or API endpoints are affected.
-   - Potential edge cases, validation rules, or error states introduced or modified.
+   - Which user interactions or user interface (UI) components are affected.
+   - Potential edge cases, validation rules, or error states visible to the user.
+   - **PENTING**: Fokus sepenuhnya pada pengujian fungsional black-box dari perspektif pengguna akhir. Jangan membuat skenario pengujian teknis seperti memverifikasi response API, query database, atau log server.
 
 4. **Generate QA test cases in JSON**:
    Draft highly detailed test cases in **Indonesian (Bahasa Indonesia)**.
+   Ensure the test cases are purely functional (non-technical). A manual tester must be able to perform every step using only the application's user interface.
    Ensure the following formatting rules are met:
    - **`task_code`**: Must be empty (`""`).
    - **`due_date`**: Must be empty (`""`).
@@ -56,7 +58,7 @@ Use this skill when the user wants to create detailed QA test cases based on the
      - `## Konteks`: Explaining what this test case covers.
      - `### Langkah reproduksi`: Step-by-step instructions on how to perform the test.
      - `### Ekspektasi`: The expected result of the test clearly defined.
-     - `### Catatan`: Any additional notes (affected endpoints, browser/device requirements, etc.).
+     - `### Catatan`: Any additional notes (browser/device requirements, test data constraints, etc. **DO NOT list API endpoints, DB queries, or other backend details**).
    
    Structure the JSON exactly as follows:
    ```json

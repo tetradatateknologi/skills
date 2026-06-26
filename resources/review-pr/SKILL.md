@@ -2,7 +2,7 @@
 name: review-pr
 description: >-
   Review a GitHub pull request and produce a single summary comment tagged
-  [AI generated]. Optionally post it to the PR via gh. Use when the user asks
+  <!-- pranalyzer:pr-review -->. Optionally post it to the PR via gh. Use when the user asks
   to review a PR, comment on a PR, post an AI review, or says "review pr",
   "komentar pr", or shares a PR URL/number.
 user-invocable: true
@@ -10,7 +10,7 @@ user-invocable: true
 
 # Review PR
 
-Review an open pull request and deliver **one summary comment** (Option B — not inline line comments). Every posted comment must start with **`[AI generated]`**.
+Review an open pull request and deliver **one summary comment** (Option B — not inline line comments). Every posted comment must start with **`<!-- pranalyzer:pr-review -->`**.
 
 Pair with `code-review` for review criteria. Do not fix code or push commits — that is `babysit`'s job.
 
@@ -65,46 +65,73 @@ Read changed files when the diff alone is insufficient (large refactors, renamed
 
 Apply `code-review` dimensions: correctness, maintainability, performance, type safety, testing.
 
-Rules:
-
-- **Must fix** — bugs, security, data loss
-- **Should fix** — performance, maintainability
-- **Nit** — minor style (skip if a linter handles it)
-- Include `file:line` references when known
-- Acknowledge what is done well (1–2 bullets max)
-- Do not bikeshed formatter/linter issues
-- If nothing actionable: say so honestly — do not invent nits
+Assess risk and categorize findings as follows:
+- **Risk Score (0.0–10.0)**: Estimate the overall risk profile of the PR.
+  - `🟢 Low Risk (0.0 - 3.9)`: Low impact, well-structured, negligible risks.
+  - `🟡 Medium Risk (4.0 - 6.9)`: Moderate complexity, some concerns or edge cases to address.
+  - `🔴 High Risk (7.0 - 10.0)`: Critical bugs, security vulnerabilities, or major architectural/data integrity risks.
+- **Categorization**: Group findings into:
+  - **Isu** (Bugs, logic errors, incorrect behaviors)
+  - **Keamanan** (Security flaws, injection risk, credential leaks)
+  - **Performa** (Inefficiencies, N+1 queries, unindexed queries)
+  - **Logika** (Flawed assumptions, design mistakes, race conditions)
+  - **OWASP Top 10** (Explicitly map findings to OWASP categories if relevant)
+- **Severity Levels**: Assign to each finding:
+  - `🔴 tinggi` (Must fix: blockers, bugs, security issues, data loss risk)
+  - `🟠 sedang` (Should fix: major performance or maintainability issues)
+  - `🟡 rendah` (Nit / Nice to have: minor enhancements, readability)
+- Include `file:line` references when known.
+- Acknowledge what is done well (1–2 bullets max) in the summary.
+- Do not bikeshed formatter/linter issues.
+- If nothing actionable: say so honestly — do not invent nits.
 
 ### 5. Format the summary comment
 
-Use this template. The first line must be exactly `[AI generated]` (no bold on that line).
+Use this template.
 
 ```markdown
-[AI generated]
+<!-- pranalyzer:pr-review -->
+## [EMOJI_WARNA] Tinjauan PR — risiko **[SKOR]/10**
 
-## Ringkasan
-<1–2 kalimat: apa yang dilakukan PR ini dan penilaian keseluruhan>
+@[username] — peninjauan kode otomatis di bawah ini. Harap tinjau sebelum menggabungkan (ini **bukan** persetujuan).
 
-## Harus Diperbaiki
-- `path/to/file.ts:42` — <masalah dan alasannya>
-(atau "Tidak ada.")
+**Ringkasan.** <1–2 kalimat: ringkasan apa yang dilakukan PR ini, aspek positif, dan penjelasan ringkas mengenai tingkat risikonya>
 
-## Sebaiknya Diperbaiki
-- `path/to/file.ts:10` — <masalah dan saran perbaikan>
-(atau "Tidak ada.")
+**[JUMLAH_ISU]** isu · **[JUMLAH_KEAMANAN]** keamanan · **[JUMLAH_PERFORMA]** performa · **[JUMLAH_LOGIKA]** logika
 
-## Catatan Kecil
-- ...
-(atau "Tidak ada.")
+> **Sebelum menggabungkan:**
+> 1. <Tindakan perbaikan prioritas tinggi/sedang 1>
+> 2. <Tindakan perbaikan prioritas tinggi/sedang 2>
 
-## Yang Sudah Baik
-- ...
+### 🐞 Isu (<JUMLAH_ISU>)
+- <warna_lingkaran> **<keparahan>** · **<Judul Temuan>** — `path/to/file.ext:line`<br><Deskripsi mendalam masalah><br>💡 <Saran perbaikan konkret>
+(Jika tidak ada, tulis "Tidak ada.")
 
----
-_Review ini dibuat oleh AI assistant. Gunakan penilaian manusia sebelum mengambil tindakan berdasarkan saran ini._
+### 🔒 Keamanan (<JUMLAH_KEAMANAN>)
+- <warna_lingkaran> **<keparahan>** · **<Judul Temuan>** — `path/to/file.ext:line` · _<Kategori OWASP jika ada>_<br><Deskripsi mendalam masalah><br>💡 <Saran perbaikan konkret>
+(Jika tidak ada, tulis "Tidak ada.")
+
+### ⚡ Performa (<JUMLAH_PERFORMA>)
+- <warna_lingkaran> **<keparahan>** · **<Judul Temuan>** — `path/to/file.ext:line`<br><Deskripsi mendalam masalah><br>💡 <Saran perbaikan konkret>
+(Jika tidak ada, tulis "Tidak ada.")
+
+### 🧠 Logika (<JUMLAH_LOGIKA>)
+- <warna_lingkaran> **<keparahan>** · **<Judul Temuan>** — `path/to/file.ext:line`<br><Deskripsi mendalam masalah><br>💡 <Saran perbaikan konkret>
+(Jika tidak ada, tulis "Tidak ada.")
+
+### 🛡️ OWASP Top 10
+- **<Kategori OWASP>** — <Deskripsi ringkas hubungan temuan keamanan dengan OWASP Top 10>
+(Jika tidak ada temuan terkait keamanan/OWASP, tulis "Tidak ada.")
 ```
 
-Omit empty sections except Must fix / Should fix (use "None."). Keep the whole comment under ~4000 characters.
+Aturan pengisian template:
+- `[EMOJI_WARNA]`: Gunakan 🟢 untuk risiko 0.0 - 3.9, 🟡 untuk risiko 4.0 - 6.9, dan 🔴 untuk risiko 7.0 - 10.0.
+- `[SKOR]`: Skor risiko numerik dalam format satu angka di belakang koma (misal: `4.0`, `1.5`, `7.2`).
+- `<warna_lingkaran>`: Gunakan 🔴 untuk tinggi, 🟠 untuk sedang, dan 🟡 untuk rendah.
+- `<keparahan>`: Gunakan `tinggi`, `sedang`, atau `rendah` (dalam huruf kecil tebal).
+- Pastikan teks deskripsi dan saran perbaikan ditulis secara mendalam namun ringkas.
+- Seluruh teks keluaran wajib menggunakan **Bahasa Indonesia**.
+- Pertahankan ukuran total komentar di bawah ~4000 karakter.
 
 ### 6. Show draft in chat
 
@@ -118,10 +145,10 @@ Post as a PR review comment (shows under Reviews):
 
 ```bash
 gh pr review <number> --comment --body "$(cat <<'EOF'
-[AI generated]
+<!-- pranalyzer:pr-review -->
+## 🟢 Tinjauan PR — risiko **2.0/10**
 
-## Summary
-...
+@username — peninjauan kode otomatis di bawah ini...
 
 EOF
 )"

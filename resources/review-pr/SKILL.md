@@ -52,14 +52,20 @@ Stop and report if:
 - PR `state` is not `OPEN` (do not post to merged/closed PRs)
 - User lacks permission to comment
 
+*Pengecekan Ukuran (Threshold Check)*:
+- Cek parameter `changedFiles`, `additions`, dan `deletions` dari PR. Jika `changedFiles > 10` atau `additions + deletions > 500`, tandai PR sebagai ukuran besar (Large PR) untuk menggunakan strategi pengambilan diff bertahap.
+
 ### 3. Fetch the change
 
-```bash
-gh pr diff <number>
-gh pr checks <number>   # optional context — note failing checks in review
-```
-
-Read changed files when the diff alone is insufficient (large refactors, renamed symbols).
+- **Daftar Berkas Terubah**: Jika PR ditandai sebagai Large PR, jalankan `gh pr diff <number> --name-only` terlebih dahulu untuk memetakan berkas apa saja yang berubah.
+- **Penyaringan Diff (Diff Filtering)**:
+  - **Abaikan** berkas manifes dependensi (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `go.sum`, `Cargo.lock`, `composer.lock`), berkas biner/gambar, aset statis raksasa, dan kode hasil generator otomatis (`*.gen.*`, `*.pb.go`, `.min.js`, tailwind/css kompilasi).
+  - Tarik diff penuh hanya untuk berkas kode logika utama yang relevan menggunakan perintah selektif atau jalankan `gh pr diff <number>` secara default jika ukuran PR kecil/sedang.
+- **Pengambilan Informasi Tambahan**:
+  ```bash
+  gh pr checks <number>   # optional context — note failing checks in review
+  ```
+- Jika diff saja tidak cukup (misal untuk memahami dependensi simbol baru), baca berkas terkait secara terfokus. Batasi pembacaan hanya pada cakupan fungsi atau blok kode yang dimodifikasi.
 
 ### 4. Review
 
@@ -80,6 +86,7 @@ Assess risk and categorize findings as follows:
   - `🔴 tinggi` (Must fix: blockers, bugs, security issues, data loss risk)
   - `🟠 sedang` (Should fix: major performance or maintainability issues)
   - `🟡 rendah` (Nit / Nice to have: minor enhancements, readability)
+- **Fokus Berkas Pengujian**: Lakukan peninjauan berkas pengujian (`*_test.go`, `*.spec.ts`, dsb.) secara minimal/sekilas saja untuk memastikan ketersediaan tes, tanpa melakukan audit baris-per-baris secara mendalam guna menghemat token.
 - Include `file:line` references when known.
 - Acknowledge what is done well (1–2 bullets max) in the summary.
 - Do not bikeshed formatter/linter issues.

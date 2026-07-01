@@ -65,7 +65,8 @@ Here is a list of the available workflows in this repository:
 - [adding-auth](resources/adding-auth/SKILL.md) - Add NextAuth.js (Auth.js) authentication.
 - [adding-midtrans](resources/adding-midtrans/SKILL.md) - Integrate Midtrans payment gateway for PHP/Go backends.
 - [adding-docker](resources/adding-docker/SKILL.md) - Dockerize applications with multi-stage Dockerfiles.
-- [adding-cicd](resources/adding-cicd/SKILL.md) - Add GitHub Actions CI/CD pipelines.
+- [adding-ci](resources/adding-ci/SKILL.md) - Add GitHub Actions CI (PR validation) pipelines.
+- [adding-cd](resources/adding-cd/SKILL.md) - Setup a Zero-Downtime Docker-Compose deployment flow with GitHub Actions.
 - [adding-api-docs](resources/adding-api-docs/SKILL.md) - Generate OpenAPI/Swagger documentation.
 - [adding-seo](resources/adding-seo/SKILL.md) - Audit and implement technical SEO improvements.
 

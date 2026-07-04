@@ -27,15 +27,23 @@ For each template in `resources/`, copy it to the target path in the user's work
 | `resources/deploy.yml.tpl` | `.github/workflows/deploy.yml` | GitHub Actions workflow for building parallel images and triggering SSH deploy. |
 | `resources/deploy-production.sh.tpl` | `scripts/deploy-production.sh` | Main pull-only deployment script. Must be marked executable (`chmod +x`). |
 | `resources/rollback-production.sh.tpl` | `scripts/rollback-production.sh` | Rollback script based on `.deploy-state`. Must be marked executable. |
-| `resources/docker-compose.prod.yml.tpl` | `docker-compose.prod.yml` | Override compose configuration for production. |
 | `resources/nginx.conf.tpl` | `web/nginx.conf` | Web Nginx configuration acting as reverse proxy for `/api/v1/`. |
 
-### 3. Setup Directories & Maintenance Files
-Ensure the following files/directories are present or created in the target workspace:
-- `deploy/maintenance/nginx.conf` (simple Nginx block to serve index.html)
-- `deploy/maintenance/index.html` (the branded maintenance page)
-- `api/VERSION` (contains initial version, e.g., `1.0.0`)
-- `web/VERSION` (contains initial version, e.g., `1.0.0`)
+### 3. Update Existing Configuration Files
+Update the project's existing `docker-compose.yml` file to be production-ready and support dynamic deployments:
+- Add dynamic image tags using environment variables with fallback defaults:
+  - `image: ${WMS_API_IMAGE:-{{APP_NAME}}-api:latest}`
+  - `image: ${WMS_WEB_IMAGE:-{{APP_NAME}}-web:latest}`
+- Bind ports dynamically:
+  - `ports: - "${POSTGRES_PORT_BINDING:-5432:5432}"` (keep database local-only in production by setting to 127.0.0.1:5432:5432)
+  - `ports: - "${WEB_PORT_BINDING:-3000:3000}"`
+- Add persistent volumes for database data to avoid data loss:
+  - Add `postgres-data:/var/lib/postgresql/data` under the postgres service volumes.
+  - Define `postgres-data:` in the top-level `volumes` block.
+- Change the dependency condition of the web container on the API container from `service_healthy` to `service_started` to prevent deadlock startup blocks.
+- Ensure the following version files are present:
+  - `api/VERSION` (contains initial version, e.g., `1.0.0`)
+  - `web/VERSION` (contains initial version, e.g., `1.0.0`)
 
 ### 4. Provide Instructions for GitHub Secrets
 After installing the files, instruct the user to configure the following in their GitHub Repository settings:

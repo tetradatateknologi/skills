@@ -21,11 +21,12 @@ log() {
 log "Reading current deployment state..."
 {{APP_NAME_UPPERCASE}}_API_TAG=$(grep -E "^{{APP_NAME_UPPERCASE}}_API_TAG=" "$STATE_FILE" | cut -d'=' -f2-)
 {{APP_NAME_UPPERCASE}}_WEB_TAG=$(grep -E "^{{APP_NAME_UPPERCASE}}_WEB_TAG=" "$STATE_FILE" | cut -d'=' -f2-)
+DOCKER_IMAGE_PREFIX=$(grep -E "^DOCKER_IMAGE_PREFIX=" "$STATE_FILE" | cut -d'=' -f2-)
 DEPLOYED_AT=$(grep -E "^DEPLOYED_AT=" "$STATE_FILE" | cut -d'=' -f2-)
 GITHUB_SHA=$(grep -E "^GITHUB_SHA=" "$STATE_FILE" | cut -d'=' -f2-)
 
-if [ -z "${{{APP_NAME_UPPERCASE}}_API_TAG}" ] || [ -z "${{{APP_NAME_UPPERCASE}}_WEB_TAG}" ]; then
-  echo "Error: Missing {{APP_NAME_UPPERCASE}}_API_TAG or {{APP_NAME_UPPERCASE}}_WEB_TAG in $STATE_FILE." >&2
+if [ -z "${{{APP_NAME_UPPERCASE}}_API_TAG}" ] || [ -z "${{{APP_NAME_UPPERCASE}}_WEB_TAG}" ] || [ -z "${DOCKER_IMAGE_PREFIX}" ]; then
+  echo "Error: Missing {{APP_NAME_UPPERCASE}}_API_TAG, {{APP_NAME_UPPERCASE}}_WEB_TAG, or DOCKER_IMAGE_PREFIX in $STATE_FILE." >&2
   exit 1
 fi
 
@@ -37,6 +38,12 @@ log "  Git Commit:  ${GITHUB_SHA}"
 
 export {{APP_NAME_UPPERCASE}}_API_TAG
 export {{APP_NAME_UPPERCASE}}_WEB_TAG
+export DOCKER_IMAGE_PREFIX
+
+# Set target images for docker-compose.yml substitution
+export {{APP_NAME_UPPERCASE}}_API_IMAGE="ghcr.io/${DOCKER_IMAGE_PREFIX}/{{APP_NAME}}-api:${{{APP_NAME_UPPERCASE}}_API_TAG}"
+export {{APP_NAME_UPPERCASE}}_WEB_IMAGE="ghcr.io/${DOCKER_IMAGE_PREFIX}/{{APP_NAME}}-web:${{{APP_NAME_UPPERCASE}}_WEB_TAG}"
+export POSTGRES_PORT_BINDING="127.0.0.1:5432:5432" # Keep DB local-only in production
 
 on_err() {
   echo "" >&2
@@ -45,13 +52,10 @@ on_err() {
 trap on_err ERR
 
 log "Pulling target rollback images..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml pull api worker web
+docker compose pull api worker web
 
-log "Stopping current services..."
-docker compose stop web api worker
-
-log "Recreating services with target tags..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-build api worker web
+log "Updating services with target tags..."
+docker compose up -d --no-build api worker web
 
 web_port="${WEB_HOST_PORT:-{{WEB_HOST_PORT}}}"
 web_port="${web_port##*:}"

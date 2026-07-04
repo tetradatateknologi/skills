@@ -6,8 +6,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-if [ "$#" -lt 5 ]; then
-  echo "Usage: $0 <API_TAG> <WEB_TAG> <GHCR_PULL_TOKEN> <GITHUB_ACTOR> <GITHUB_SHA>" >&2
+if [ "$#" -lt 6 ]; then
+  echo "Usage: $0 <API_TAG> <WEB_TAG> <GHCR_PULL_TOKEN> <GITHUB_ACTOR> <GITHUB_SHA> <DOCKER_IMAGE_PREFIX>" >&2
   exit 1
 fi
 
@@ -16,13 +16,20 @@ export {{APP_NAME_UPPERCASE}}_WEB_TAG="$2"
 GHCR_PULL_TOKEN="$3"
 GITHUB_ACTOR="$4"
 GITHUB_SHA="$5"
+export DOCKER_IMAGE_PREFIX="$6"
+
+# Set target images for docker-compose.yml substitution
+export {{APP_NAME_UPPERCASE}}_API_IMAGE="ghcr.io/${DOCKER_IMAGE_PREFIX}/{{APP_NAME}}-api:${{{APP_NAME_UPPERCASE}}_API_TAG}"
+export {{APP_NAME_UPPERCASE}}_WEB_IMAGE="ghcr.io/${DOCKER_IMAGE_PREFIX}/{{APP_NAME}}-web:${{{APP_NAME_UPPERCASE}}_WEB_TAG}"
+export POSTGRES_PORT_BINDING="127.0.0.1:5432:5432" # Keep DB local-only in production
 
 on_err() {
   echo "" >&2
-  echo "==> Deploy failed. Maintenance page may still be serving on WEB_HOST_PORT." >&2
+  echo "==> Deploy failed. Showing api logs for troubleshooting:" >&2
+  docker compose logs --tail=100 api || true
+  echo "" >&2
   echo "    To recover manually:" >&2
-  echo "      docker compose --profile maintenance stop maintenance" >&2
-  echo "      docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d api worker web" >&2
+  echo "      docker compose up -d api worker web" >&2
 }
 
 trap on_err ERR
@@ -35,25 +42,23 @@ log "Logging in to GHCR..."
 echo "${GHCR_PULL_TOKEN}" | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
 
 log "Pulling new images from GHCR (app services stay online)..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml pull api worker web
+docker compose pull api worker web
 
-log "Stopping app services (web, api, worker)..."
-docker compose stop web api worker
+log "Updating api and worker (runs migrations on startup)..."
+docker compose up -d --force-recreate api worker
 
-log "Starting maintenance page..."
-docker compose --profile maintenance up -d maintenance
+log "Waiting for api to be healthy..."
+deadline=$((SECONDS + 300))
+until docker compose ps api | grep -q "healthy"; do
+  if (( SECONDS >= deadline )); then
+    echo "Timed out waiting for api to become healthy" >&2
+    exit 1
+  fi
+  sleep 3
+done
 
-log "Running database migrations..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile migrate run --rm migrate
-
-log "Starting api and worker (maintenance still on WEB_HOST_PORT)..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate api worker
-
-log "Stopping maintenance page..."
-docker compose --profile maintenance stop maintenance
-
-log "Starting web..."
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate web
+log "Updating web..."
+docker compose up -d --force-recreate web
 
 web_port="${WEB_HOST_PORT:-{{WEB_HOST_PORT}}}"
 web_port="${web_port##*:}"
@@ -71,6 +76,7 @@ log "Saving deploy state to .deploy-state..."
 cat <<EOF > .deploy-state
 {{APP_NAME_UPPERCASE}}_API_TAG=${{{APP_NAME_UPPERCASE}}_API_TAG}
 {{APP_NAME_UPPERCASE}}_WEB_TAG=${{{APP_NAME_UPPERCASE}}_WEB_TAG}
+DOCKER_IMAGE_PREFIX=${DOCKER_IMAGE_PREFIX}
 DEPLOYED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 GITHUB_SHA=${GITHUB_SHA}
 EOF

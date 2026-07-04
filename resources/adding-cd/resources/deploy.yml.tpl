@@ -132,5 +132,5 @@ jobs:
             cd "$DEPLOY_DIR"
             git fetch origin
             git reset --hard origin/main
-            chmod +x scripts/deploy-production.sh
-            ./scripts/deploy-production.sh "${{ needs.build-api.outputs.version }}" "${{ needs.build-web.outputs.version }}" "${{ secrets.GHCR_PULL_TOKEN }}" "${{ github.actor }}" "${{ github.sha }}"
+            owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+            ./scripts/deploy-production.sh "${{ needs.build-api.outputs.version }}" "${{ needs.build-web.outputs.version }}" "${{ secrets.GHCR_PULL_TOKEN }}" "${{ github.actor }}" "${{ github.sha }}" "$owner"

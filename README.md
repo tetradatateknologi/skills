@@ -42,6 +42,7 @@ Here is a list of the available workflows in this repository:
 - [push](resources/push/SKILL.md) - Commit local changes and push to remote.
 - [creating-pr](resources/creating-pr/SKILL.md) - Create clean, review-ready pull requests.
 - [review-pr](resources/review-pr/SKILL.md) - Perform a thorough pull request review and post summary comments.
+- [explain-code-review](resources/explain-code-review/SKILL.md) - Explain MR/PR review feedback in Bahasa Indonesia with draft replies and fix guidance (GitHub + GitLab).
 - [babysit](resources/babysit/SKILL.md) - Monitor an open PR for CI failures, reviews, and conflicts, fixing them automatically.
 
 ### Code Quality, Testing & Security

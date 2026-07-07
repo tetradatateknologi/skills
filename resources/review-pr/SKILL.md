@@ -185,4 +185,5 @@ End with:
 
 - For deeper bug-focused scans, optionally run `review-bugbot` first, then merge findings into this summary format
 - Inline comments require fragile line positions — out of scope for v1; use this summary-only skill instead
+- If the user wants to understand review feedback as the PR author, hand off to `explain-code-review`
 - If the user wants ongoing PR maintenance after posting, hand off to `babysit`

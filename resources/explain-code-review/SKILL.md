@@ -242,4 +242,5 @@ Add `--repo owner/repo` (gh) or `-R namespace/project` (glab) when not in that r
 | Generate AI review | `review-pr` |
 | Auto-fix after briefing | `babysit` |
 | Review criteria reference | `code-review` |
+| Triage pentest / VA report (text input) | `explain-security-findings` |
 | Evaluate approach before coding | `what-do-you-think` |

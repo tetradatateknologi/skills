@@ -49,3 +49,4 @@ Use this skill when the user asks to audit security, check for vulnerabilities, 
 - This is a code review, not a penetration test. Recommend tools like `npm audit`, `trivy`, or `snyk` for automated scanning.
 - Always check `.gitignore` to ensure `.env`, credentials, and key files are excluded.
 - For comprehensive auditing, recommend the OWASP Testing Guide.
+- To explain and triage findings from an external pentest or VA report (pasted text or file), use `explain-security-findings`.

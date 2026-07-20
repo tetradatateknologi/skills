@@ -51,6 +51,7 @@ Here is a list of the available workflows in this repository:
 - [adding-e2e-tests](resources/adding-e2e-tests/SKILL.md) - Set up Playwright end-to-end testing.
 - [code-review](resources/code-review/SKILL.md) - Perform a code review focused on correctness, performance, and style.
 - [auditing-security](resources/auditing-security/SKILL.md) - Audit codebase for OWASP Top 10 vulnerabilities and secrets exposure.
+- [explain-security-findings](resources/explain-security-findings/SKILL.md) - Explain and triage pentest/VA report findings from pasted text or files (valid/invalid assessment in Bahasa Indonesia).
 - [auditing-performance](resources/auditing-performance/SKILL.md) - Audit bundle size, rendering, database queries, and Core Web Vitals.
 
 ### Analysis & Troubleshooting
